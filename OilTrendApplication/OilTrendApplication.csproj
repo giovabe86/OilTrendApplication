@@ -261,6 +261,7 @@
     <Compile Include="ApiService\OilTrendAPI.cs" />
     <Compile Include="ApiService\OilTrendService.cs" />
     <Compile Include="Business\SourceBrentMethods.cs" />
+    <Compile Include="Model\JsonRpcResponse.cs" />
     <Compile Include="Model\OilTrendValuesReponse.cs" />
     <Compile Include="Model\SourceBrentDataset.cs" />
     <Compile Include="Persistency\OilTrendVariationsCRUD.cs" />
