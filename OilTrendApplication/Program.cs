@@ -38,12 +38,12 @@ namespace OilTrendApplication
             });
             var sourceBrentDataset = Business.SourceBrentMethods.RetrieveSourceBrentDatasetAsync();
             SQLiteManager.StartupApplication(sourceBrentDataset);
-            
-            //This can be omitted because Listen on 127.0.0.1:5000 is the default, but it's shown here as an example
+            //Open connection on server host 
             JsonRpc.ServerOptions = (o) =>
             {
                 o.Listen(new IPEndPoint(IPAddress.Parse(System.Configuration.ConfigurationManager.AppSettings["ServerUrl"]), 5000));
             };
+            //Setup optional dependency injection
             var builder = new ContainerBuilder();
             builder.RegisterType<OilTrendAPI>();
             builder.RegisterType<OilTrendService>().As<IOilTrendService>();

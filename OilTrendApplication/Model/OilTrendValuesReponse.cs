@@ -7,7 +7,9 @@ using System.Threading.Tasks;
 
 namespace OilTrendApplication.Model
 {
-
+    /// <summary>
+    /// Object passed to json rpc response with list of prices
+    /// </summary>
     public class Prices
     {
         [JsonProperty("prices")]

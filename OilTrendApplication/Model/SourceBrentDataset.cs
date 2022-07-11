@@ -7,6 +7,9 @@ using System.Threading.Tasks;
 
 namespace OilTrendApplication.Model
 {
+    /// <summary>
+    /// Object retrived calling brent oil data method 
+    /// </summary>
     public class SourceBrentDataset
     {
         [JsonProperty("Date")]

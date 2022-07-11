@@ -6,7 +6,9 @@ using System.Threading.Tasks;
 
 namespace OilTrendApplication.Model
 {
-    // Root myDeserializedClass = JsonConvert.DeserializeObject<Root>(myJsonResponse);
+    /// <summary>
+    /// Object used in Json Rpc Deserializazion response
+    /// </summary>
     public class Price
     {
         public string dateISO8601 { get; set; }

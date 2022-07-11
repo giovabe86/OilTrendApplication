@@ -16,6 +16,10 @@ namespace OilTrendApplication.Persistency
         private static SQLiteConnection sqliteConnection;
         public SQLiteManager()
         { }
+        /// <summary>
+        /// Db object for Sqlite connection
+        /// </summary>
+        /// <returns></returns>
         public static SQLiteConnection DbConnection()
         {
             sqliteConnection = new SQLiteConnection("Data Source=" + DB_FILE + "; Version=3;");
@@ -23,6 +27,10 @@ namespace OilTrendApplication.Persistency
             return sqliteConnection;
         }
 
+        /// <summary>
+        /// Method called during startup application to create and insert values in Sqlite db
+        /// </summary>
+        /// <param name="valuesBase">List of values retreived calling the oil brent list</param>
         public static void StartupApplication(List<SourceBrentDataset> valuesBase)
         {
             try
@@ -31,8 +39,11 @@ namespace OilTrendApplication.Persistency
                 {
                     SQLiteConnection.CreateFile(DB_FILE);
                 }
+                //Create table if not exists
                 OilTrendVariationsCRUD.CreateTableTrendValues();
+                //Clean table if exists
                 OilTrendVariationsCRUD.DeleteAllOilTrendValues();
+                //Insert values in OilTrendPrices
                 OilTrendVariationsCRUD.AddOilTrendPrices(valuesBase);
             }
             catch

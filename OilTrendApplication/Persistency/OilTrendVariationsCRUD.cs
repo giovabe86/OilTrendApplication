@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SQLite;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -37,7 +38,7 @@ namespace OilTrendApplication.Persistency
         /// <param name="StartDate">
         /// Interval start date. If empty, searching startless limit
         /// </param>
-        /// <param name="EndDate">Interval end date</param>
+        /// <param name="EndDate">Interval end date if empty searching endless</param>
         /// <returns></returns>
         public static Prices GetOilTrendValues(String StartDate, String EndDate)
         {
@@ -47,15 +48,19 @@ namespace OilTrendApplication.Persistency
             DataTable dt = new DataTable();
             try
             {
+                //Check date values isoCode
+                if (!String.IsNullOrEmpty(StartDate)) { DateTime.ParseExact(StartDate, "yyyy-MM-dd", CultureInfo.InvariantCulture); }
+                if (!String.IsNullOrEmpty(EndDate)){DateTime.ParseExact(EndDate, "yyyy-MM-dd", CultureInfo.InvariantCulture);}
                 using (var cmd = SQLiteManager.DbConnection().CreateCommand())
                 {
                     //Query creation
                     StringBuilder query = new StringBuilder("SELECT * FROM OilTrendPrices ");
 
-                        if (String.IsNullOrEmpty(StartDate)) { StartDate = "1900-01-01"; }
-                        if (String.IsNullOrEmpty(EndDate)) { EndDate = "now"; }
-                        query.Append($" WHERE date(dateISO8601) BETWEEN date('{StartDate}') AND date('{EndDate}')");
-                    
+                    if (String.IsNullOrEmpty(StartDate)) { StartDate = "1900-01-01"; }
+                    if (String.IsNullOrEmpty(EndDate)) { EndDate = "now"; }
+
+                    query.Append($" WHERE date(dateISO8601) BETWEEN date('{StartDate}') AND date('{EndDate}')");
+
                     cmd.CommandText = query.ToString();
                     da = new SQLiteDataAdapter(cmd.CommandText, SQLiteManager.DbConnection());
                     da.Fill(dt);
@@ -67,7 +72,7 @@ namespace OilTrendApplication.Persistency
                         source.price = Convert.ToDecimal(dr[1]);
                         datasets.Add(source);
                     }
-                    prices.prices= datasets;
+                    prices.prices = datasets;
                 }
                 return prices;
             }
@@ -77,14 +82,16 @@ namespace OilTrendApplication.Persistency
             }
         }
 
+        /// <summary>
+        /// Bulk insert of oil trend values in OilTrendPrices
+        /// </summary>
+        /// <param name="valueBase">List of values</param>
         public static void AddOilTrendPrices(List<SourceBrentDataset> valueBase)
         {
             try
             {
                 using (var conn = SQLiteManager.DbConnection())
                 {
-                    // Be sure you already created the Person Table!
-
                     using (var cmd = new SQLiteCommand(conn))
                     {
                         using (var transaction = conn.BeginTransaction())
@@ -106,6 +113,9 @@ namespace OilTrendApplication.Persistency
                 throw ex;
             }
         }
+        /// <summary>
+        /// Cleans all values form OilTrendPrices table
+        /// </summary>
         public static void DeleteAllOilTrendValues()
         {
             try

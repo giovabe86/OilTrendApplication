@@ -13,8 +13,9 @@ namespace OilTrendApplication.Business
         /// <returns>List of brent prices list deserialized</returns>
         public static List<SourceBrentDataset> RetrieveSourceBrentDatasetAsync()
         {
+            //Read Url from web config
             String completeUrl = System.Configuration.ConfigurationManager.AppSettings["SourceBrentUrl"];
-
+            //Excute call and download json
             using (WebClient wc = new WebClient())
             {
                 var json = wc.DownloadString(completeUrl);
