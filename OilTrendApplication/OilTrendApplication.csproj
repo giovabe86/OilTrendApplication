@@ -256,7 +256,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ApiService\BaseAPI.cs" />
     <Compile Include="ApiService\IOilTrendService.cs" />
     <Compile Include="ApiService\OilTrendAPI.cs" />
     <Compile Include="ApiService\OilTrendService.cs" />

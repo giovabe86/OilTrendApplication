@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 namespace OilTrendApplication.ApiService
 {
     [JsonRpcClass("oilprice")]
-    public class OilTrendAPI : BaseAPI
+    public class OilTrendAPI
     {
         private IOilTrendService OilTrendService { get; }
 
