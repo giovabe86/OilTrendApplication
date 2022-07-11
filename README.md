@@ -98,7 +98,7 @@ Response
 }
 ```
 ### Esecuzione progetto OilTrendApplicationTest
-**PREMESSA** Affinchè l'applicazione funzioni è necessario avviare l'exe dalla cartella di progetto al percorso ..\OilTrendApplication\OilTrendApplication\bin\[Profilo di avvio]\OilTrendApplication.exe. Nel caso in cui non si sia ancora compilato il progetto procedere con la compilazione.
+**PREMESSA** Affinchè l'applicazione funzioni è necessario avviare l'exe dalla cartella di progetto al percorso ..\OilTrendApplication\OilTrendApplication\bin\\[Profilo di avvio]\OilTrendApplication.exe. Nel caso in cui non si sia ancora compilato il progetto procedere con la compilazione e avviare l'exe generato.
 
 ### Come avviare il test
 Accertarsi che l'exe sia avviato e sia visibile il prompt dei comandi con il messaggio **Listening for JSON-RPC requests**.
