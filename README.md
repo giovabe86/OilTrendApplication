@@ -20,7 +20,7 @@ Il progetto è una soluzione VS con due progetti principali **OilTrendApplicatio
 - Dalla Solution Explorer fare un build dell'intera soluzione. 
 - Eseguire il progetto OilTrendApplication
 - All'avvio viene visualizzato un prompt dei comandi, il messaggio **Listening for JSON-RPC requests** conferma che l'applicazione è attiva e in ascolto
-- L'applicazione gira sulla porta 5000 di localhost. Per inviare delle richieste, eseguire delle richieste GET o POST:
+- L'applicazione gira sulla porta 5000 di localhost. Per inviare delle richieste, come da protocollo JSON-RPC,eseguire delle chiamate GET o POST:
 - I parametri principali per le richieste sono:
 	-	[method] rappresenta il metodo invocato (nel nostro caso oilprice.Trend)
 	-	[id] identificativo alfanumerico associato alla chiamata 
@@ -29,8 +29,8 @@ Il progetto è una soluzione VS con due progetti principali **OilTrendApplicatio
 ```
 [startDateISO8601] ed il [endDateISO8601] possono essere valorizzati o meno
 -	[startDateISO8601] ed il [endDateISO8601] valorizzati limita la ricerca entro gli estremi
--	[startDateISO8601] non valorizzato ed il [endDateISO8601] valorizzato definisce un limite superiore alla ricerca considerando tutto ciò che c'è prima
--	[startDateISO8601] valorizzato ed il [endDateISO8601] non valorizzto definisce un limite inferiore alla ricerca considerando tutto ciò che c'è dopo
+-	[startDateISO8601] non valorizzato ed il [endDateISO8601] valorizzato definisce un limite superiore sulla data considerando tutti le info del periodo precedente
+-	[startDateISO8601] valorizzato ed il [endDateISO8601] definisce un limite superiore sulla data considerando tutti le info del periodo successivo
 -	[startDateISO8601] ed il [endDateISO8601] non valorizzato restituisce tutte i dati presenti in db
 ```
 ### ESEMPIO Chiamata GET
@@ -97,8 +97,8 @@ Response
     "error": null
 }
 ```
-### Esecuzione OilTrendApplicationTest
-**PREMESSA** Affinchè l'applicazione funzioni è necessario avviare l'exe dalla cartella di progetto al percorso \OilTrendApplication_\OilTrendApplication\bin\[Profilo di avvio]\OilTrendApplication.exe. Nel caso in cui non si sia ancora compilato il progetto procedere con la compilazione.
+### Esecuzione progetto OilTrendApplicationTest
+**PREMESSA** Affinchè l'applicazione funzioni è necessario avviare l'exe dalla cartella di progetto al percorso ..\OilTrendApplication\OilTrendApplication\bin\[Profilo di avvio]\OilTrendApplication.exe. Nel caso in cui non si sia ancora compilato il progetto procedere con la compilazione.
 
 ### Come avviare il test
 Accertarsi che l'exe sia avviato e sia visibile il prompt dei comandi con il messaggio **Listening for JSON-RPC requests**.
