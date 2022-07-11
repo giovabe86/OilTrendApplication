@@ -27,11 +27,11 @@ Il progetto è una soluzione VS con due progetti principali **OilTrendApplicatio
 	-	[startDateISO8601] data inizio ricerca in formato ISO 'YYYY-MM-DD'
 	-	[endDateISO8601] data fine ricerca in formato ISO 'YYYY-MM-DD'
 ```
-[startDateISO8601] ed il [endDateISO8601] possono essere valorizzati o meno
--	[startDateISO8601] ed il [endDateISO8601] valorizzati limita la ricerca entro gli estremi
--	[startDateISO8601] non valorizzato ed il [endDateISO8601] valorizzato definisce un limite superiore sulla data considerando tutti le info del periodo precedente
--	[startDateISO8601] valorizzato ed il [endDateISO8601] definisce un limite superiore sulla data considerando tutti le info del periodo successivo
--	[startDateISO8601] ed il [endDateISO8601] non valorizzato restituisce tutte i dati presenti in db
+I parametri di input [startDateISO8601] ed [endDateISO8601] possono essere valorizzati come segue: 
+-[startDateISO8601] ed il [endDateISO8601] valorizzati limita la ricerca entro gli estremi
+-[startDateISO8601] non valorizzato ed il [endDateISO8601] valorizzato verranno estratti tutti i record con data uguale/precedente alla data fine
+-[startDateISO8601] valorizzato ed il [endDateISO8601] non valorizzato verranno estratti tutti i record con data uguale/successiva alla data di inizio
+-[startDateISO8601] ed [endDateISO8601] entrambi non valororizzati, verranno estratti tutte i dati presenti in db
 ```
 ### ESEMPIO Chiamata GET
 
