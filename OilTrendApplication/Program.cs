@@ -28,26 +28,25 @@ namespace OilTrendApplication
             Log.Logger = new LoggerConfiguration()
                 .WriteTo.Console()
                 .CreateLogger();
-
             JsonRpc.LoggerFactory = new LoggerFactory().AddSerilog();
-            var s = System.Configuration.ConfigurationManager.AppSettings["ServerUrl"];
             //Custom error handling
             JsonRpc.OnError(e =>
             {
                 Debug.WriteLine(e.ToString());
             });
+            //Retrieving data from Json on site
             var sourceBrentDataset = Business.SourceBrentMethods.RetrieveSourceBrentDatasetAsync();
-            SQLiteManager.StartupApplication(sourceBrentDataset);
+            //Loading SQLite configuration and insert 
+            SQLiteManager.LoadSQLiteOnStartupApplication(sourceBrentDataset);
             //Open connection on server host 
             JsonRpc.ServerOptions = (o) =>
             {
-                o.Listen(new IPEndPoint(IPAddress.Parse(System.Configuration.ConfigurationManager.AppSettings["ServerUrl"]), 5000));
+                o.Listen(new IPEndPoint(IPAddress.Parse(Utils.Config.ServerUrl), Utils.Config.ServerUrlPort));
             };
             //Setup optional dependency injection
             var builder = new ContainerBuilder();
             builder.RegisterType<OilTrendAPI>();
             builder.RegisterType<OilTrendService>().As<IOilTrendService>();
-            
             var container = builder.Build();
             var csl = new AutofacServiceLocator(container);
             ServiceLocator.SetLocatorProvider(() => csl);

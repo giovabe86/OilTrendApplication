@@ -20,7 +20,10 @@ namespace OilTrendApplicationTests
         protected TestsBase()
         {
             Client = new HttpClient();
-            Client.BaseAddress = new Uri("http://localhost:5000/");
+            UriBuilder uriBuilder = new UriBuilder();
+            uriBuilder.Host = System.Configuration.ConfigurationManager.AppSettings["ServerUrl"];
+            uriBuilder.Port = Convert.ToInt32(System.Configuration.ConfigurationManager.AppSettings["ServerUrlPort"]);
+            Client.BaseAddress = uriBuilder.Uri;
             Client.DefaultRequestHeaders.Accept.Add(
                     new MediaTypeWithQualityHeaderValue("application/json"));
         }

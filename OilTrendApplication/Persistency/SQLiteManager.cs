@@ -31,7 +31,7 @@ namespace OilTrendApplication.Persistency
         /// Method called during startup application to create and insert values in Sqlite db
         /// </summary>
         /// <param name="valuesBase">List of values retreived calling the oil brent list</param>
-        public static void StartupApplication(List<SourceBrentDataset> valuesBase)
+        public static void LoadSQLiteOnStartupApplication(List<SourceBrentDataset> valuesBase)
         {
             try
             {
